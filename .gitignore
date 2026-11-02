@@ -1,0 +1,23 @@
+node_modules/
+dist/
+dist-portfolio/
+.pnpm-store/
+.env
+.env.local
+.env.*
+deploy/*.env
+!.env.example
+# _input/
+# public/media/offers/*
+!public/media/offers/.gitkeep
+*.log
+/var/reports/
+/var/imo-import/
+.DS_Store
+/oferty_*.zip
+/oferty.json
+
+# Local review and production-only configuration; not part of the demo commit.
+/PORTFOLIO-CLEAN-REPORT.md
+/Dockerfile
+/compose.production.yml

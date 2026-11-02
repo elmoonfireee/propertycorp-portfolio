@@ -1,0 +1,82 @@
+import assert from "node:assert/strict";
+import { JSDOM } from "jsdom";
+import React, { act } from "react";
+import { createServer } from "vite";
+
+const dom = new JSDOM("<!doctype html><html><body><div id='root'></div></body></html>", { url: "https://portfolio.example.test/" });
+globalThis.window = dom.window;
+globalThis.document = dom.window.document;
+Object.defineProperty(globalThis, "navigator", { value: dom.window.navigator, configurable: true });
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+window.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} });
+
+const { createRoot } = await import("react-dom/client");
+const server = await createServer({ configFile: false, optimizeDeps: { noDiscovery: true, include: [] }, server: { middlewareMode: true, hmr: false }, appType: "custom" });
+const root = createRoot(document.getElementById("root"));
+const images = Array.from({ length: 9 }, (_, index) => ({ filename: `image-${index + 1}.jpg`, url: `/synthetic-${index + 1}.jpg` }));
+const offer = (count) => ({ id: `synthetic-${count}`, title: "Oferta testowa", images: images.slice(0, count) });
+const click = async (element) => { assert.ok(element, "expected clickable element"); await act(async () => element.click()); };
+const key = async (target, value, options = {}) => {
+  const event = new window.KeyboardEvent("keydown", { key: value, bubbles: true, cancelable: true, ...options });
+  await act(async () => target.dispatchEvent(event));
+  return event;
+};
+const button = (label) => document.querySelector(`button[aria-label="${label}"]`);
+
+try {
+  const { OfferGallery } = await server.ssrLoadModule("/src/components/offers/OfferGallery.jsx");
+  await act(async () => root.render(React.createElement(OfferGallery, { offer: offer(0) })));
+  assert.ok(document.querySelector(".offer-gallery__placeholder"), "empty gallery has a placeholder");
+  await act(async () => root.render(React.createElement(OfferGallery, { offer: offer(1) })));
+  assert.equal(document.querySelectorAll(".offer-gallery__grid").length, 1);
+  assert.equal(button("Następne zdjęcia"), null, "one image has no group navigation");
+  await act(async () => root.render(React.createElement(OfferGallery, { offer: offer(4) })));
+  assert.equal(document.querySelectorAll(".offer-gallery__grid").length, 1);
+  assert.equal(button("Następne zdjęcia"), null, "four images fit in one group");
+  await act(async () => root.render(React.createElement(OfferGallery, { offer: offer(5) })));
+  assert.deepEqual([...document.querySelectorAll(".offer-gallery__grid")].map((group) => group.getAttribute("aria-label")), ["Zdjęcia 1–4 z 5", "Zdjęcia 5–5 z 5"]);
+  await act(async () => root.render(React.createElement(OfferGallery, { offer: offer(9) })));
+  const groups = [...document.querySelectorAll(".offer-gallery__grid")];
+  assert.deepEqual(groups.map((group) => group.getAttribute("aria-label")), ["Zdjęcia 1–4 z 9", "Zdjęcia 5–8 z 9", "Zdjęcia 9–9 z 9"]);
+  assert.deepEqual(groups.map((group) => group.getAttribute("aria-hidden")), ["false", "true", "true"]);
+  assert.equal(button("Poprzednie zdjęcia").disabled, true);
+  await click(button("Następne zdjęcia"));
+  assert.equal(groups[1].getAttribute("aria-hidden"), "false");
+  assert.equal(groups[0].querySelector("button").tabIndex, -1);
+  const fifth = button("Otwórz Zdjęcie 5 z 9: Oferta testowa");
+  await act(async () => fifth.focus());
+  await click(fifth);
+  const dialog = document.querySelector('[role="dialog"]');
+  assert.ok(dialog);
+  assert.equal(document.activeElement, dialog);
+  assert.equal(dialog.querySelector("img").getAttribute("src"), "/synthetic-5.jpg");
+  assert.match(dialog.textContent, /05\s*\/\s*09/);
+  await key(window, "ArrowRight");
+  assert.equal(dialog.querySelector("img").getAttribute("src"), "/synthetic-6.jpg");
+  await key(window, "ArrowLeft");
+  assert.equal(dialog.querySelector("img").getAttribute("src"), "/synthetic-5.jpg");
+  const close = button("Zamknij galerię");
+  const last = button("Następne zdjęcie");
+  await act(async () => close.focus());
+  const shiftTab = await key(window, "Tab", { shiftKey: true });
+  assert.equal(shiftTab.defaultPrevented, true);
+  assert.equal(document.activeElement, last);
+  const tab = await key(window, "Tab");
+  assert.equal(tab.defaultPrevented, true);
+  assert.equal(document.activeElement, close);
+  await key(window, "Escape");
+  assert.equal(document.querySelector('[role="dialog"]'), null);
+  assert.equal(document.activeElement, fifth, "closing restores focus to the opener");
+  await key(document.querySelector(".offer-gallery"), "ArrowRight");
+  assert.equal(groups[2].getAttribute("aria-hidden"), "false");
+  await click(button("Otwórz Zdjęcie 9 z 9: Oferta testowa"));
+  await click(button("Następne zdjęcie"));
+  assert.equal(document.querySelector('[role="dialog"] img').getAttribute("src"), "/synthetic-1.jpg", "next wraps around");
+  await click(button("Poprzednie zdjęcie"));
+  assert.equal(document.querySelector('[role="dialog"] img').getAttribute("src"), "/synthetic-9.jpg", "previous wraps around");
+} finally {
+  await act(async () => root.unmount());
+  await server.close();
+  dom.window.close();
+}
+console.log("Offer gallery: grouping, indexing, opening, navigation and focus passed.");
