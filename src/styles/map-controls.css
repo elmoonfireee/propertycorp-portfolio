@@ -1,0 +1,38 @@
+.map-type-toggle { display: flex; min-height: 48px; padding: 3px; align-items: stretch; border: 1px solid rgba(223,207,185,.72); border-radius: 12px; background: #11182a; box-shadow: 0 10px 24px rgba(3,7,16,.3); }
+.map-type-toggle button { min-width: 66px; padding: 0 13px; color: rgba(255,253,248,.78); border: 0; border-radius: 8px; background: transparent; cursor: pointer; font: inherit; font-size: 11px; font-weight: 700; line-height: 1; transition: color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+.map-type-toggle button:hover { color: #fffdf8; background: rgba(223,207,185,.13); }
+.map-type-toggle button.is-active { color: #11182a; background: #dfcfb9; box-shadow: 0 1px 0 rgba(255,255,255,.45) inset; }
+.map-type-toggle button:focus-visible { outline: 2px solid #fffdf8; outline-offset: 2px; }
+
+.approximate-location-notice { box-sizing: border-box; }
+.approximate-location-notice--detail { display: grid; max-width: 510px; margin: 14px 0 0; gap: 8px; }
+.approximate-location-notice__badge { display: inline-flex; width: fit-content; min-height: 28px; padding: 0 9px; align-items: center; gap: 6px; color: #4e4133; border: 1px solid rgba(199,164,123,.74); border-radius: 999px; background: rgba(223,207,185,.23); font-size: 10px; font-weight: 700; letter-spacing: .035em; line-height: 1; }
+.approximate-location-notice__badge svg { width: 13px; color: #9e784d; }
+.approximate-location-notice--detail > p { max-width: 480px; margin: 0; color: #666964; font-size: 12px; line-height: 1.55; }
+.approximate-location-notice--mini { display: inline-flex; width: fit-content; margin: 11px 0 0 !important; align-items: center; gap: 6px; color: rgba(223,207,185,.9) !important; font-size: 11px !important; font-weight: 700; letter-spacing: .035em !important; line-height: 1.35; text-transform: none !important; }
+.approximate-location-notice--mini svg { width: 13px; flex: none; color: var(--pc-sand-soft); }
+.approximate-location-notice--map { position: relative; z-index: 8; width: fit-content; max-width: min(360px, 100%); margin: 10px 0 0; color: #fffdf8; border: 1px solid rgba(223,207,185,.38); border-radius: 8px; background: rgba(17,24,42,.94); box-shadow: 0 8px 20px rgba(3,7,16,.2); }
+.approximate-location-notice--map summary { display: flex; min-height: 36px; padding: 0 10px; align-items: center; gap: 7px; color: var(--pc-sand-soft); cursor: pointer; font-size: 10px; font-weight: 700; line-height: 1.25; list-style: none; }
+.approximate-location-notice--map summary::-webkit-details-marker { display: none; }
+.approximate-location-notice--map summary svg { width: 13px; flex: none; color: var(--pc-sand-soft); }
+.approximate-location-notice--map summary span { color: inherit; font: inherit; }
+.approximate-location-notice--map summary:focus-visible { outline: 2px solid #fffdf8; outline-offset: 3px; border-radius: inherit; }
+.approximate-location-notice--map > p { display: none; max-width: 330px; margin: 0; padding: 0 10px 10px 30px; color: rgba(255,253,248,.76); font-size: 10px; line-height: 1.5; }
+.approximate-location-notice--map:is([open], :hover, :focus-within) > p { display: block; }
+.property-map-modal__location-notice { position: absolute; top: 18px; left: 18px; max-width: min(360px, calc(100% - 206px)); margin: 0; }
+.offer-map-dialog__location-notice { margin-top: 13px; }
+.offer-map__heading .approximate-location-notice--detail > p { max-width: 480px; margin: 0; color: #666964; font-size: 12px; line-height: 1.55; }
+.offer-map-dialog__panel header .approximate-location-notice--map > p { display: none; max-width: 330px; margin: 0; padding: 0 10px 10px 30px; color: rgba(255,253,248,.76); font-size: 10px; line-height: 1.5; }
+.offer-map-dialog__panel header .approximate-location-notice--map:is([open], :hover, :focus-within) > p { display: block; }
+
+@media (max-width: 700px) {
+  .map-type-toggle { min-height: 46px; border-radius: 11px; }
+  .map-type-toggle button { min-width: 60px; padding-inline: 10px; font-size: 10px; }
+  .approximate-location-notice--detail { margin-top: 12px; gap: 7px; }
+  .approximate-location-notice__badge { min-height: 30px; font-size: 10px; }
+  .approximate-location-notice--detail > p { font-size: 12px; }
+  .approximate-location-notice--mini { margin-top: 10px; font-size: 11px !important; }
+  .approximate-location-notice--map { max-width: min(310px, 100%); }
+  .approximate-location-notice--map summary { min-height: 42px; font-size: 10px; }
+  .property-map-modal__location-notice { top: 14px; left: 14px; max-width: calc(100% - 182px); }
+}
