@@ -5,7 +5,8 @@ import {
   ChevronDown, Flame, LandPlot, Layers3, Mail, MapPin, Maximize2, Phone, Ruler, Trees, Warehouse, X,
 } from "lucide-react";
 import { getOfferAgent } from "../../data/agents.js";
-import { siteEditionConfig } from "../../config/siteEdition.js";
+import { siteEditionConfig, isPortfolioEdition } from "../../config/siteEdition.js";
+import { DemoOffersMap } from "./DemoOffersMap.jsx";
 import {
   formatPhone, formatPrice, formatPricePerSquareMeter, getDescriptionPreview, getDetailGroups,
   getAmenitySpecs, getOfferDescriptionParagraphs, getOfferPublicLocationPresentation, getPrimarySpecs, getPublicLocation,
@@ -283,7 +284,10 @@ export function OfferMap({ offer }) {
           <ApproximateLocationNotice precision={locationPrecision} />
           <p className="pc-body-copy">{presentation.description}</p>
         </div>
-        {hasMapSurface ? (consent.externalMedia
+        {isPortfolioEdition && mapPosition ? (consent.externalMedia
+          ? <DemoOffersMap offers={[offer]} title={`Mapa poglądowej lokalizacji: ${presentation.heading}`} />
+          : <GoogleMapsConsentPlaceholder className="offer-map__surface" title="Mapa jest wyłączona" />
+        ) : hasMapSurface ? (consent.externalMedia
           ? <div className="offer-map__surface" data-map-provider="google" data-location-mode={presentation.mode}>
             {isNear ? <MapCanvas apiKey={googleMapsJavaScriptApiKey} mapPosition={mapPosition} title={`Mapa Google: ${presentation.heading}`} zoom={presentation.inlineZoom} mapType={mapType} /> : <div className="offer-map__placeholder" aria-hidden="true"><MapPin /><span>Przygotowujemy mapę lokalizacji</span></div>}
             {isNear && canOpenMap && <div className="offer-map__view-controls">
@@ -293,7 +297,7 @@ export function OfferMap({ offer }) {
           </div>
           : <GoogleMapsConsentPlaceholder className="offer-map__surface" title="Mapa Google jest wyłączona" />
         ) : <div className="offer-map__fallback" data-map-provider="fallback"><MapPin aria-hidden="true" /><div><strong>{presentation.heading}</strong><span className="pc-body-copy">{presentation.mode === "point" ? "Mapę lokalizacji otworzysz w Google Maps." : presentation.description}</span></div></div>}
-      {mapUrls && <div className="offer-map__actions">
+      {!isPortfolioEdition && mapUrls && <div className="offer-map__actions">
         <a className="offer-map__external" href={mapUrls.external} target="_blank" rel="noreferrer">{presentation.externalLabel} <Maximize2 aria-hidden="true" /></a>
       </div>}
       </section>

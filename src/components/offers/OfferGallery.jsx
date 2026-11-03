@@ -15,6 +15,7 @@ function groupImages(images, size = 4) {
 
 function OfferLightbox({ images, initialIndex, title, onClose }) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
+  const [failedImages, setFailedImages] = useState(() => new Set());
   const dialogRef = useRef(null);
   const previousFocusRef = useRef(null);
 
@@ -73,7 +74,7 @@ function OfferLightbox({ images, initialIndex, title, onClose }) {
           <button type="button" aria-label="Zamknij galerię" onClick={onClose}><X aria-hidden="true" /></button>
         </div>
         <div className="offer-lightbox__image" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-          <img src={image.url} alt={imageAlt(title, activeIndex, images.length)} />
+          {failedImages.has(image.url) ? <GalleryPlaceholder /> : <img src={image.url} alt={imageAlt(title, activeIndex, images.length)} onError={() => setFailedImages((previous) => new Set(previous).add(image.url))} />}
         </div>
         {images.length > 1 && <>
           <button type="button" className="offer-lightbox__nav offer-lightbox__nav--previous" aria-label="Poprzednie zdjęcie" onClick={showPrevious}><ArrowLeft aria-hidden="true" /></button>
@@ -96,6 +97,7 @@ function GalleryPlaceholder() {
 }
 
 function GalleryGroup({ activeGroup, groupIndex, images, offerTitle, totalImages, onOpen, suppressClickRef }) {
+  const [failedImages, setFailedImages] = useState(() => new Set());
   const groupStart = groupIndex * 4;
   return (
     <div className={`offer-gallery__grid offer-gallery__grid--${images.length}`} role="group" aria-label={`Zdjęcia ${groupStart + 1}–${groupStart + images.length} z ${totalImages}`} aria-hidden={groupIndex !== activeGroup}>
@@ -116,7 +118,7 @@ function GalleryGroup({ activeGroup, groupIndex, images, offerTitle, totalImages
               onOpen(imageIndex);
             }}
           >
-            <img src={image.url} alt={imageAlt(offerTitle, imageIndex, totalImages)} loading={groupIndex === activeGroup && index === 0 ? "eager" : "lazy"} />
+            {failedImages.has(image.url) ? <GalleryPlaceholder /> : <img src={image.url} alt={imageAlt(offerTitle, imageIndex, totalImages)} loading={groupIndex === activeGroup && index === 0 ? "eager" : "lazy"} onError={() => setFailedImages((previous) => new Set(previous).add(image.url))} />}
           </button>
         );
       })}

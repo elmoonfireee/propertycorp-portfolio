@@ -122,6 +122,7 @@ function OfferHeroInfo({ offer }) {
         <p className="offer-detail__eyebrow">{getOfferEyebrow(offer)}</p>
         <p className="offer-hero-info__location"><MapPin aria-hidden="true" />{location}</p>
         <h1 className={`offer-hero-info__title offer-hero-info__title--${titleSize}`}>{offer.title}</h1>
+        <p>Oferta jest fikcyjna, a zdjęcia mają charakter poglądowy.</p>
       </div>
     </section>
   );

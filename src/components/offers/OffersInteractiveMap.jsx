@@ -23,6 +23,8 @@ import { useConsent } from "../../consent/ConsentProvider.jsx";
 import { trackEvent } from "../../analytics/googleAnalytics.js";
 import { MapTypeToggle } from "./MapTypeToggle.jsx";
 import { ApproximateLocationNotice } from "./ApproximateLocationNotice.jsx";
+import { isPortfolioEdition } from "../../config/siteEdition.js";
+import { DemoOffersMap } from "./DemoOffersMap.jsx";
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_JAVASCRIPT_API_KEY?.trim()
   || import.meta.env.VITE_GOOGLE_MAPS_EMBED_API_KEY?.trim();
@@ -486,8 +488,9 @@ export function ConsentAwareOffersMap({
 }) {
   const { consent } = useConsent();
   if (!consent.externalMedia) {
-    return <GoogleMapsConsentPlaceholder className={`property-map property-map--${mapMode} ${className}`.trim()} title="Mapa Google jest wyłączona" />;
+    return <GoogleMapsConsentPlaceholder className={`property-map property-map--${mapMode} ${className}`.trim()} title={isPortfolioEdition ? "Mapa jest wyłączona" : "Mapa Google jest wyłączona"} />;
   }
+  if (isPortfolioEdition) return <DemoOffersMap offers={offers} title={title} className={className} mapMode={mapMode} isFullscreen={isFullscreen} onToggleFullscreen={onToggleFullscreen} />;
   return <OffersInteractiveMap
     offers={offers}
     title={title}

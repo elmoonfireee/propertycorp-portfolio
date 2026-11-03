@@ -273,26 +273,26 @@ function parseRawOffer(id) {
   return parse(offer.opis, { name: offer.agent_nazwisko, phone: offer.agent_tel_kom });
 }
 
-const offer17 = parseRawOffer("17");
+const offer17 = parseRawOffer("900004");
 assert.deepEqual(sectionTypes(offer17), ["location", "locationBenefits", "property", "propertyBenefits", "layout"]);
 assert.equal(offer17.sections[1].items.length, 5);
 assert.equal(offer17.closing.length, 1);
 
-const investment = parseRawOffer("18");
+const investment = parseRawOffer("900005");
 assert.deepEqual(sectionTypes(investment).slice(0, 3), ["location", "locationBenefits", "investment"]);
 
-const investmentWithBenefits = parseRawOffer("14");
+const investmentWithBenefits = parseRawOffer("900003");
 assert.equal(sectionTypes(investmentWithBenefits).includes("investment"), true);
 assert.equal(sectionTypes(investmentWithBenefits).includes("investmentBenefits"), true);
 
-const house = parseRawOffer("28");
+const house = parseRawOffer("900006");
 assert.deepEqual(sectionTypes(house).slice(0, 8), ["location", "locationBenefits", "plot", "plotBenefits", "property", "propertyBenefits", "layout", "standard"]);
 assert.equal(house.sections.find((section) => section.type === "layout").groups.length, 2);
 
-const commercial = parseRawOffer("7");
+const commercial = parseRawOffer("900001");
 assert.deepEqual(sectionTypes(commercial), ["layout", "propertyBenefits", "businessUses", "costs"]);
 
-const offer33 = parseRawOffer("33");
+const offer33 = parseRawOffer("900008");
 const compactAreaLayout = offer33.sections.find((section) => section.type === "layout");
 assert.deepEqual(compactAreaLayout.groups[0].rows.slice(0, 3).map(({ label, value }) => ({ label, value })), [
   { label: "Korytarz", value: "4,0 m²" },
@@ -300,7 +300,7 @@ assert.deepEqual(compactAreaLayout.groups[0].rows.slice(0, 3).map(({ label, valu
   { label: "Łazienka", value: "5,0 m²" },
 ]);
 
-const offer31 = parseRawOffer("31");
+const offer31 = parseRawOffer("900007");
 const noSeparatorLayout = offer31.sections.find((section) => section.type === "layout");
 assert.deepEqual(noSeparatorLayout.groups[0].rows.slice(0, 6).map(({ label, value }) => ({ label, value })), [
   { label: "Wiatrołap", value: "4,0 m²" },

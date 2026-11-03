@@ -9,7 +9,7 @@ const steps = [
     title: "Najpierw rozmowa.",
     text: "Zaczynamy od Twojej sytuacji, potrzeb i oczekiwań. Jeśli masz nieruchomość, poznajemy ją i jej kontekst. Jeśli szukasz, ustalamy czego naprawdę potrzebujesz.",
     descriptor: "CEL · POTRZEBY · KONTEKST",
-    image: "/media/demo/scene.svg",
+    image: "/media/site/collaboration/rozmowa.png",
     alt: "Tło etapu rozmowy",
     position: "center",
     mobileObjectPosition: "25% 72%",
@@ -19,7 +19,7 @@ const steps = [
     title: "Ustalamy właściwy kierunek.",
     text: "Analizujemy sytuację, rynek i możliwości. Wspólnie określamy priorytety, tempo działania i to, co w danym momencie ma największe znaczenie.",
     descriptor: "ANALIZA · STRATEGIA · SELEKCJA",
-    image: "/media/demo/scene.svg",
+    image: "/media/site/collaboration/strategia.png",
     alt: "Tło etapu strategii",
     position: "center",
     mobileObjectPosition: "20% 56%",
@@ -29,7 +29,7 @@ const steps = [
     title: "Przechodzimy do działania.",
     text: "Przygotowujemy ofertę lub selekcjonujemy nieruchomości. Organizujemy prezentacje, prowadzimy rozmowy i negocjacje. Dbamy, by każdy kolejny krok był dobrze uzasadniony.",
     descriptor: "OFERTA · PREZENTACJE · NEGOCJACJE",
-    image: "/media/demo/scene.svg",
+    image: "/media/site/collaboration/dzialania.png",
     alt: "Tło etapu działania",
     position: "center 58%",
     mobileObjectPosition: "42% 58%",
@@ -39,7 +39,7 @@ const steps = [
     title: "Domykamy szczegóły.",
     text: "Koordynujemy formalności, dokumenty i ustalenia między stronami. Jesteśmy obecni do podpisania umowy i przekazania kluczy.",
     descriptor: "FORMALNOŚCI · UMOWA · KLUCZE",
-    image: "/media/demo/scene.svg",
+    image: "/media/site/collaboration/przekazaniekluczy.png",
     alt: "Tło etapu przekazania kluczy",
     mobileObjectPosition: "58% 52%",
   },
@@ -115,7 +115,7 @@ function StoryCard({ step, index, setCardRef }) {
 function EndSheet({ sheetRef, contentMotionRef }) {
   return (
     <section className="collaboration-story__end-sheet" ref={sheetRef} style={{ transform: "translate3d(0, 100%, 0)" }}>
-      <img className="collaboration-story__end-image" src="/media/demo/scene.svg" alt="" aria-hidden="true" />
+      <img className="collaboration-story__end-image" src="/media/site/collaboration/end-sheet-background.png" alt="" aria-hidden="true" />
       <div className="collaboration-story__end-content-motion" ref={contentMotionRef}>
         <div className="collaboration-story__end-content final-shell">
           <Reveal {...REVEAL_MOTION.eyebrow} offset={20}><p>PropertyCorp</p></Reveal>
@@ -146,7 +146,7 @@ function PropertyCorpChapter({ chapterRef, contentRef }) {
         <div className="collaboration-story__chapter-copy">
           <Reveal as="div" className="collaboration-story__chapter-media" delay={160} duration={REVEAL_MOTION.media.duration} offset={56}>
             <div className="collaboration-story__chapter-media-recess">
-              <img src="/media/demo/scene.svg" alt="Zespół PropertyCorp podczas rozmowy z klientami" loading="lazy" />
+              <img src="/media/site/collaboration/rozpowa_1.jpg" alt="Zespół PropertyCorp podczas rozmowy z klientami" loading="lazy" />
             </div>
           </Reveal>
         </div>
@@ -305,7 +305,7 @@ export function CollaborationScrollStory() {
           <div className="collaboration-story__intro" ref={introRef}>
             <img
               className="collaboration-story__intro-image"
-              src="/media/demo/scene.svg"
+              src="/media/site/collaboration/wspolpraca1.png"
               alt=""
             />
             <div className="collaboration-story__intro-shade" aria-hidden="true" />

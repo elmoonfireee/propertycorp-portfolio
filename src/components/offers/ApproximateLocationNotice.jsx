@@ -1,5 +1,6 @@
 import React from "react";
 import { Info } from "lucide-react";
+import { isPortfolioEdition } from "../../config/siteEdition.js";
 
 const DETAIL_LABEL = "Lokalizacja przybliżona";
 const DETAIL_EXPLANATION = "Punkt na mapie wskazuje najbliższą okolicę nieruchomości. Dokładny adres udostępni opiekun oferty.";
@@ -16,6 +17,9 @@ export function getOfferLocationPrecision(offer) {
 }
 
 export function ApproximateLocationNotice({ precision = "approximate", variant = "detail", className = "" }) {
+  if (isPortfolioEdition) {
+    return <p className={`approximate-location-notice approximate-location-notice--${variant} ${className}`.trim()}><Info aria-hidden="true" /><span>Fikcyjne lokalizacje — punkty na mapie są poglądowe.</span></p>;
+  }
   if (precision !== "approximate") return null;
 
   const classes = `approximate-location-notice approximate-location-notice--${variant} ${className}`.trim();

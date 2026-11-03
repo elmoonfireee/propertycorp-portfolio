@@ -12,7 +12,7 @@ function PolicyLinks() {
 function CookieBanner() {
   const { acceptAll, rejectOptional, openConsentPreferences } = useConsent();
   return <aside className="consent-banner" aria-label="Ustawienia prywatności">
-    <div className="consent-banner__copy"><p>Prywatność i cookies</p><span>Używamy niezbędnych technologii do prawidłowego działania strony. Za Twoją zgodą możemy również korzystać z narzędzi analitycznych oraz usług zewnętrznych, takich jak Mapy Google. Swój wybór możesz w każdej chwili zmienić.</span><PolicyLinks /></div>
+    <div className="consent-banner__copy"><p>Prywatność i cookies</p><span>Używamy niezbędnych technologii do prawidłowego działania strony. Za Twoją zgodą możemy również korzystać z narzędzi analitycznych oraz usług zewnętrznych, takich jak mapy OpenStreetMap lub Google Maps. Swój wybór możesz w każdej chwili zmienić.</span><PolicyLinks /></div>
     <div className="consent-banner__actions"><button type="button" className="consent-button consent-button--quiet" onClick={rejectOptional}>Odrzuć opcjonalne</button><button type="button" className="consent-button consent-button--quiet" data-consent-settings-trigger onClick={openConsentPreferences}>Ustawienia</button><button type="button" className="consent-button" onClick={acceptAll}>Akceptuję wszystkie <Check aria-hidden="true" /></button></div>
   </aside>;
 }
@@ -81,7 +81,7 @@ function ConsentPreferences() {
       <div className="consent-preferences__items">
         <ConsentToggle label="Niezbędne" checked copy="Zapewniają podstawowe działanie strony oraz zapamiętują Twój wybór dotyczący prywatności." disabled />
         <ConsentToggle label="Analityczne" checked={draft.analytics} onChange={(analytics) => setDraft((current) => ({ ...current, analytics }))} copy="Pomagają nam zrozumieć sposób korzystania ze strony, popularność ofert oraz skuteczność jej funkcji za pomocą Google Analytics." />
-        <ConsentToggle label="Mapy i treści zewnętrzne" checked={draft.externalMedia} onChange={(externalMedia) => setDraft((current) => ({ ...current, externalMedia }))} copy="Pozwalają wczytywać Mapy Google. Po włączeniu przeglądarka komunikuje się bezpośrednio z usługami Google." />
+        <ConsentToggle label="Mapy i treści zewnętrzne" checked={draft.externalMedia} onChange={(externalMedia) => setDraft((current) => ({ ...current, externalMedia }))} copy="Pozwalają wczytywać mapy OpenStreetMap lub Google Maps. Po włączeniu przeglądarka komunikuje się bezpośrednio z odpowiednim dostawcą." />
       </div>
       <footer><PolicyLinks /><div className="consent-preferences__actions"><button type="button" className="consent-button consent-button--quiet" onClick={reject}>Odrzuć opcjonalne</button><button type="button" className="consent-button consent-button--quiet" onClick={save}>Zapisz wybór</button><button type="button" className="consent-button" onClick={accept}>Akceptuję wszystkie <Check aria-hidden="true" /></button></div></footer>
       {!hasDecision && <span className="consent-preferences__note">Niezbędne technologie pozostają zawsze aktywne.</span>}

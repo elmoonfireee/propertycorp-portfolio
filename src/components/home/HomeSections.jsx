@@ -101,7 +101,7 @@ export function AboutTeam() {
       <Reveal as="div" className="home-about__image" {...REVEAL_MOTION.media} offset={56}>
         <SiteAssetImage
           asset={siteAssets.team}
-          alt="Osoba Demo A i Osoba Demo B z PropertyCorp"
+          alt="Zespół PropertyCorp"
           loading="lazy"
           fallback={<div className="home-about__fallback" aria-hidden="true"><span>PropertyCorp</span></div>}
         />
@@ -139,13 +139,13 @@ export function ExperienceSection() {
             </Reveal>
           </div>
           <Reveal as="figure" className="home-experience__media home-experience__media--first" {...REVEAL_MOTION.media} offset={44}>
-            <img src="/media/demo/scene.svg" alt="Agent PropertyCorp prezentujący materiały sprzedażowe" loading="lazy" />
+            <img src="/zdjecie1.jpg" alt="Agent PropertyCorp prezentujący materiały sprzedażowe" loading="lazy" />
           </Reveal>
         </article>
 
         <article className="home-experience__row home-experience__row--presence">
           <Reveal as="figure" className="home-experience__media home-experience__media--second" {...REVEAL_MOTION.media} offset={44}>
-            <img src="/media/demo/scene.svg" alt="Przedstawicielka PropertyCorp podczas codziennej pracy" loading="lazy" />
+            <img src="/zdjecie2.jpg" alt="Przedstawicielka PropertyCorp podczas codziennej pracy" loading="lazy" />
           </Reveal>
           <div className="home-experience__copy">
             <Reveal as="p" {...REVEAL_MOTION.eyebrow}>PropertyCorp na co dzień</Reveal>

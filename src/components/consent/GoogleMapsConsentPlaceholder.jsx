@@ -8,6 +8,6 @@ export function GoogleMapsConsentPlaceholder({ className = "", title = "Mapa Goo
     <MapPin aria-hidden="true" />
     <strong>{title}</strong>
     <span>Aby zobaczyć lokalizację lub oferty na mapie, zezwól na Mapy i treści zewnętrzne.</span>
-    <button type="button" onClick={() => setExternalMediaConsent(true)}>Włącz Mapy Google</button>
+    <button type="button" onClick={() => setExternalMediaConsent(true)}>Włącz mapę</button>
   </div>;
 }

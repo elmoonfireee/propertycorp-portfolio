@@ -171,7 +171,7 @@ function FeaturedHeading({ actionsDetailHref = null }) {
         <Reveal as="p" {...REVEAL_MOTION.eyebrow}>Na pierwszym planie</Reveal>
         <Reveal as="h2" {...REVEAL_MOTION.heading}>Adresy, które<br />warto zobaczyć.</Reveal>
       </div>
-      <Reveal className="home-featured__action" {...REVEAL_MOTION.copy}><span className="pc-body-copy">{FEATURED_COPY}</span>{actionsDetailHref ? <FeaturedPropertyActions detailHref={actionsDetailHref} /> : <a href="/oferty">Zobacz wszystkie oferty <ArrowRight /></a>}</Reveal>
+      <Reveal className="home-featured__action" {...REVEAL_MOTION.copy}><span className="pc-body-copy">{FEATURED_COPY}</span><span className="pc-body-copy">Oferty są fikcyjne, a zdjęcia mają charakter poglądowy.</span>{actionsDetailHref ? <FeaturedPropertyActions detailHref={actionsDetailHref} /> : <a href="/oferty">Zobacz wszystkie oferty <ArrowRight /></a>}</Reveal>
     </div>
   );
 }

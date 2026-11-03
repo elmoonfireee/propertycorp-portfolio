@@ -78,6 +78,7 @@ function OffersHero() {
         <Reveal as="p" {...REVEAL_MOTION.eyebrow}>Oferty</Reveal>
         <Reveal as="h1" {...REVEAL_MOTION.heading}>Znajdź miejsce,<br />którego szukasz.</Reveal>
         <Reveal className="offers-hero__lead" {...REVEAL_MOTION.copy}>Wybrane nieruchomości we Wrocławiu i okolicach. Zawęź wyniki i znajdź adres dopasowany do swoich potrzeb.</Reveal>
+        <p>Oferty są fikcyjne, a zdjęcia mają charakter poglądowy.</p>
       </div>
     </section>
   );

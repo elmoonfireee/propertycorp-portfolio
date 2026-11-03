@@ -1,6 +1,6 @@
 # PropertyCorp - demonstracja portfolio
 
-Demonstracyjna aplikacja React 18 i Vite prezentująca katalog nieruchomości. Wszystkie oferty, opisy, grafiki, współrzędne i dane kontaktowe w tej kopii są fikcyjne. To nie jest działająca strona biura ani oferta sprzedaży. Grafiki SVG przygotowano specjalnie na potrzeby demonstracji.
+Demonstracyjna aplikacja React 18 i Vite prezentująca katalog nieruchomości. Wszystkie oferty, ich opisy, zdjęcia, współrzędne i dane kontaktowe w tej kopii są fikcyjne. Grafiki strony, logo i zdjęcia zespołu pochodzą z oryginalnej aplikacji. To nie jest działająca strona biura ani oferta sprzedaży. Zdjęcia ofert są wygenerowanymi obrazami poglądowymi; nieruchomości nie istnieją jako rzeczywiste ogłoszenia.
 
 ## Uruchomienie
 
@@ -17,14 +17,14 @@ Serwer demonstracyjny nasłuchuje domyślnie tylko na `127.0.0.1`. Domyślny pro
 
 Lista, filtrowanie, sortowanie, szczegóły, galeria oraz parser opisów używają tego samego modelu danych co aplikacja źródłowa. Zmienne `VITE_OFFERS_REPOSITORY=local` i `runtime` wybierają istniejący adapter podczas buildu. Runtime wymaga własnego endpointu API z danymi testowymi; wariant local nie wymaga serwera API. Narzędzia importu i serwer są zachowane do testów, ale nie uruchamiają się podczas zwykłego startu demonstracji. Nie należy kierować ich na dane ani środowisko produkcyjne.
 
-Mapa Google wymaga własnego klucza, konfiguracji i zgody; współrzędne demonstracyjne wskazują fikcyjne punkty na oceanie. Bez konfiguracji widoczny jest stan zastępczy. Formularz w profilu portfolio nie wysyła zapytań. Opinie, analityka, SMTP i integracje zewnętrzne nie są skonfigurowane ani wymagane do demonstracji. Adresy example.test i numery zerowe są fikcyjne.
+Mapa portfolio korzysta z OpenStreetMap i działa po zgodzie na mapy i treści zewnętrzne; wymaga połączenia z internetem, ale nie wymaga klucza Google. Punkty są fikcyjne i mają charakter wyłącznie poglądowy. Wariant klienta może korzystać z Google Maps po konfiguracji klucza. Formularz w profilu portfolio nie wysyła zapytań. Opinie, analityka, SMTP i integracje zewnętrzne nie są skonfigurowane ani wymagane do demonstracji. Adresy example.test i numery zerowe są fikcyjne.
 
 ## Struktura
 
 - `src/pages` i `src/components` - widoki, komponenty i interakcje.
 - `src/domain/offers` - normalizacja, filtry, sortowanie i parser opisów.
 - `src/services/offers` - lokalny i serwerowy adapter ofert.
-- `_input/imo-current` i `public/media` - syntetyczne dane i autorskie ilustracje demonstracyjne.
+- `_input/imo-current` i `public/media` - syntetyczne dane ofert oraz grafiki strony i obrazy demonstracyjne.
 - `scripts`, `server` i `api` - testy, narzędzia i opcjonalny serwer.
 
 ## Testy

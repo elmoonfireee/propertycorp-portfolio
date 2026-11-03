@@ -21,17 +21,17 @@ const deliveredAsset = (path, purpose, options = {}) => ({
  */
 export const siteAssets = {
   brand: {
-    logoDark: pendingAsset("/media/demo/scene.svg", "PropertyCorp light logo for dark floating header"),
+    logoDark: deliveredAsset("/media/brand/logo-propertycorp-dark.png", "PropertyCorp light logo for dark floating header"),
     favicon: pendingAsset("/media/demo/scene.svg", "Browser favicon"),
     appleTouchIcon: pendingAsset("/media/demo/scene.svg", "Apple touch icon"),
   },
   hero: {
     slides: [
-      deliveredAsset("/media/demo/scene.svg", "Homepage hero sequence — exterior", { motion: "pan", position: "50% 50%", mobilePosition: "52% 50%" }),
-      deliveredAsset("/media/demo/scene-2.svg", "Homepage hero sequence — interior", { motion: "pan", position: "50% 52%", mobilePosition: "58% 52%" }),
+      deliveredAsset("/media/site/hero/hero-propertycorp-1.webp", "Homepage hero sequence — exterior", { motion: "pan", position: "50% 50%", mobilePosition: "52% 50%" }),
+      deliveredAsset("/media/site/hero/hero-propertycorp-2.webp", "Homepage hero sequence — interior", { motion: "pan", position: "50% 52%", mobilePosition: "58% 52%" }),
     ],
   },
-  team: deliveredAsset("/media/demo/scene.svg", "PropertyCorp team photograph"),
+  team: deliveredAsset("/media/site/collaboration/karo_filip.jpg", "PropertyCorp team photograph"),
   seo: {
     openGraph: pendingAsset("/media/demo/scene.svg", "Open Graph sharing image"),
   },

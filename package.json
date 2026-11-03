@@ -52,6 +52,7 @@
     "audit:offer-description-headings": "node scripts/audit-offer-description-headings.mjs"
   },
   "dependencies": {
+    "leaflet": "1.9.4",
     "lucide-react": "^0.468.0",
     "nodemailer": "^6.9.16",
     "react": "^18.3.1",

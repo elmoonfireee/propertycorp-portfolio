@@ -58,7 +58,7 @@ const duplicateExpected = expectedPosition(rawFor(duplicateGroup.offers[0]));
 assert.deepEqual(duplicateGroup.position, duplicateExpected, "a grouped marker must keep the shared IMO coordinate, not a centroid");
 assert.equal(getOfferMapPositionKey(duplicateGroup.position), `${duplicateExpected.lat}:${duplicateExpected.lng}`);
 
-const reportIds = ["17", "18", "12"];
+const reportIds = ["900004", "900005", "900002"];
 const report = reportIds.map((id) => {
   const offer = offers.find((entry) => entry.externalId === id);
   const rawOffer = rawFor(offer);
