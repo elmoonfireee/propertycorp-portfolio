@@ -33,7 +33,13 @@ function useHashAnchorNavigation() {
     let nestedFrame = null;
 
     const scrollToHashTarget = () => {
-      const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      let id;
+      try {
+        id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      } catch (error) {
+        if (error instanceof URIError) return;
+        throw error;
+      }
       if (!id) return;
 
       window.cancelAnimationFrame(frame);

@@ -43,6 +43,7 @@
     "test:offer-gallery": "node scripts/test-offer-gallery.mjs",
     "test:rich-offer-description": "node scripts/test-rich-offer-description.mjs",
     "test:offer-navigation": "node scripts/test-offer-navigation.mjs",
+    "test:hash-navigation": "node scripts/test-hash-navigation.mjs",
     "test:offer-sorting": "node scripts/test-offer-sorting.mjs",
     "test:site-editions": "node scripts/test-site-editions.mjs",
     "test:google-reviews": "node scripts/test-google-reviews.mjs",
