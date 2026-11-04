@@ -16,13 +16,14 @@ export function formatOfferFloor(floor) {
 }
 
 export function getOfferDescriptionPreview(description) {
+  const fallback = "Poznaj układ, lokalizację i szczegóły tej wyjątkowej nieruchomości.";
   const plainText = String(description?.text || "").replace(/\s+/g, " ").trim();
-  if (!plainText) return "Poznaj układ, lokalizację i szczegóły tej wyjątkowej nieruchomości.";
+  if (!plainText) return fallback;
 
   const legalNotice = /treść niniejszego|niniejsze ogłoszenie|nie stanowi oferty|kodeksu cywilnego|charakter informacyjny|oferta wysłana z programu imo/i;
   const sentences = plainText.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((sentence) => sentence.trim()).filter(Boolean) || [];
   const firstEditorialSentence = sentences.find((sentence) => !legalNotice.test(sentence));
 
   // The preview is taken from a whole sentence; CSS only clamps it visually.
-  return firstEditorialSentence || "Poznaj układ, lokalizację i szczegóły tej wyjątkowej nieruchomości.";
+  return firstEditorialSentence || fallback;
 }

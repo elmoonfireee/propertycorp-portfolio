@@ -6,11 +6,8 @@ import {
   SORT_OPTIONS,
   TRANSACTION_OPTIONS,
   pluralizeOffers,
+  selectedValues,
 } from "../../domain/offers/offerListing.js";
-
-function selectedValues(value) {
-  return Array.isArray(value) ? value : value ? [value] : [];
-}
 
 export function toggleFilterValue(values, value) {
   const selected = selectedValues(values);

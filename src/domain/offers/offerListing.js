@@ -92,10 +92,14 @@ export function formatNumber(value) {
   return new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 }).format(value);
 }
 
+export function selectedValues(value) {
+  return Array.isArray(value) ? value : value ? [value] : [];
+}
+
 export function getActiveFilterChips(filters, facets) {
-  const selectedTypes = Array.isArray(filters.type) ? filters.type : filters.type ? [filters.type] : [];
-  const selectedLocations = Array.isArray(filters.location) ? filters.location : filters.location ? [filters.location] : [];
-  const selectedRooms = Array.isArray(filters.rooms) ? filters.rooms : filters.rooms ? [filters.rooms] : [];
+  const selectedTypes = selectedValues(filters.type);
+  const selectedLocations = selectedValues(filters.location);
+  const selectedRooms = selectedValues(filters.rooms);
   const chips = [
     filters.transaction && { key: "transaction", label: getTransactionLabel(filters.transaction) },
     ...selectedTypes.map((type) => ({ key: `type:${type}`, label: getTypeLabel(type) })),
