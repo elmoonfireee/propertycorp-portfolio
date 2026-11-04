@@ -7,9 +7,11 @@ function imageAlt(title, index, count) {
   return `Zdjęcie ${index + 1} z ${count}: ${title}`;
 }
 
-function groupImages(images, size = 4) {
+const IMAGES_PER_GROUP = 4;
+
+function groupImages(images) {
   const groups = [];
-  for (let index = 0; index < images.length; index += size) groups.push(images.slice(index, index + size));
+  for (let index = 0; index < images.length; index += IMAGES_PER_GROUP) groups.push(images.slice(index, index + IMAGES_PER_GROUP));
   return groups;
 }
 
@@ -98,7 +100,7 @@ function GalleryPlaceholder() {
 
 function GalleryGroup({ activeGroup, groupIndex, images, offerTitle, totalImages, onOpen, suppressClickRef }) {
   const [failedImages, setFailedImages] = useState(() => new Set());
-  const groupStart = groupIndex * 4;
+  const groupStart = groupIndex * IMAGES_PER_GROUP;
   return (
     <div className={`offer-gallery__grid offer-gallery__grid--${images.length}`} role="group" aria-label={`Zdjęcia ${groupStart + 1}–${groupStart + images.length} z ${totalImages}`} aria-hidden={groupIndex !== activeGroup}>
       {images.map((image, index) => {

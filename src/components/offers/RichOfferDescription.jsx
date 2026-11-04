@@ -46,10 +46,6 @@ function ListItems({ items, sectionType }) {
   </ul>;
 }
 
-function ListSection({ section }) {
-  return <ListItems items={section.items} sectionType={section.type} />;
-}
-
 function KeyValueRows({ rows }) {
   return <dl className="offer-description-rich__key-values">
     {rows.map((row, index) => <div className={row.type === "summary" ? "is-summary" : ""} key={`${row.label}-${index}`}>
@@ -132,7 +128,7 @@ function DescriptionSection({ section }) {
     {section.type === "layout"
       ? <LayoutSection section={section} />
       : isList && section.legacyList
-        ? <ListSection section={section} />
+        ? <ListItems items={section.items} sectionType={section.type} />
         : <div className={isWell || isStructured ? `offer-description-rich__well${section.type === "important" ? " offer-description-rich__well--important" : ""}` : "offer-description-rich__prose-wrap"}>
           {isStructured ? <StructuredBlocks blocks={section.blocks} sectionType={section.type} /> : <Prose blocks={section.blocks} />}
         </div>}
