@@ -166,12 +166,12 @@ export function filterOffers(offers, filters = {}) {
 }
 
 export function sortOffers(offers, sort = DEFAULT_OFFER_FILTERS.sort) {
+  if (sort === "newest") return sortOffersByIntroductionDate(offers);
   const sorted = [...offers];
   if (sort === "price-asc") return sorted.sort((left, right) => (left.price.amount ?? Infinity) - (right.price.amount ?? Infinity));
   if (sort === "price-desc") return sorted.sort((left, right) => (right.price.amount ?? -Infinity) - (left.price.amount ?? -Infinity));
   if (sort === "area-asc") return sorted.sort((left, right) => (left.area ?? Infinity) - (right.area ?? Infinity));
   if (sort === "area-desc") return sorted.sort((left, right) => (right.area ?? -Infinity) - (left.area ?? -Infinity));
-  if (sort === "newest") return sortOffersByIntroductionDate(sorted);
   return sorted.sort((left, right) => Number(right.flags.featured) - Number(left.flags.featured));
 }
 

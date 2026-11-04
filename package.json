@@ -36,6 +36,8 @@
     "test:weekly-report-delivery": "node scripts/test-weekly-report-delivery.mjs",
     "test:map-positions": "node scripts/test-map-positions.mjs",
     "test:offer-filters": "node scripts/test-offer-filters.mjs",
+    "test:filter-selection": "node scripts/test-filter-selection.mjs",
+    "test:humanization": "node scripts/test-humanization.mjs",
     "test:offer-navigation": "node scripts/test-offer-navigation.mjs",
     "test:offer-sorting": "node scripts/test-offer-sorting.mjs",
     "test:site-editions": "node scripts/test-site-editions.mjs",
